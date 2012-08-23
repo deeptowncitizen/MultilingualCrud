@@ -62,10 +62,24 @@ function getContent(\$model, \$language, \$field) {
     
 /// Generate translation tabs
 \$tabs = array();
+\$theModel = \$model;
 foreach( \$langs as \$language ) {
     \$isSource = ( 0 == strcasecmp(\$language->language, Yii::app()->language) );
     if( \$isSource ) {
         \$tabs = array_reverse(\$tabs, true); 
+    }
+    
+    \$model = 0;
+    if( isset(\$models) ) {
+        foreach( \$models as \$model1 ) {
+            if( \$model1->language == \$language->language ) {
+                \$model = \$model1;
+                break;
+            }
+        }
+        if( !\$model ) {
+            \$model = \$theModel;
+        }
     }
     
     \$content = '';

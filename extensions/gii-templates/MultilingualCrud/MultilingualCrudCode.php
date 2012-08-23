@@ -95,8 +95,7 @@ class MultilingualCrudCode extends CCodeModel
 				$this->_table=$table;
 			}
 		}
-
-        $theModel = new $this->model();    
+        $theModel = new $class();    
         if( !array_key_exists( $this->behaviorName, $theModel->behaviors() ) ) {
             $this->addError('model', $this->errorBehaviorMissed);
         }

@@ -104,6 +104,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	public function actionUpdate($<?php echo implode( ', $', $fPk ); ?>)
     {
         $model=$this->loadModel($<?php echo implode( ', $', $fPk ); ?>);
+        $models=$this->loadFullModels($<?php echo $fPk[0]; ?>);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -116,6 +117,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
         }*/
 
         $this->render('update',array(
+            'models'=>$models,
             'model'=>$model,
             'modelId' => $id,
         ));
@@ -189,7 +191,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
      */
     public function loadFullModels(<?php echo "\${$fPk[0]}"; ?>)
     {
-        $models = <?php echo $this->modelClass; ?>::model()->findByAttributes( array('<?php echo "{$fPk[0]}"; ?>' => <?php echo "\${$fPk[0]}"; ?>) );
+        $models = <?php echo $this->modelClass; ?>::model()->findAllByAttributes( array('<?php echo "{$fPk[0]}"; ?>' => <?php echo "\${$fPk[0]}"; ?>) );
         if($models === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $models;

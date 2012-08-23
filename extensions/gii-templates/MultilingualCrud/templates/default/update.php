@@ -38,9 +38,14 @@ $this->menu=array(
 <h1>Update <?php echo $this->modelClass." #<?php echo \$model->{$firstField}; ?>"; ?></h1>
 
 <?php
-echo "<?php
-if( isset(\$modelId) )
-	echo \$this->renderPartial('_form', array('model'=>\$model, 'modelId' => \$modelId));
-else
-	echo \$this->renderPartial('_form', array('model'=>\$model));";
+echo "<?php\n
+    \$ar = array();
+    \$ar['model'] = \$model;
+    if( isset(\$modelId) )
+        \$ar['modelId'] = \$modelId;
+    if( isset(\$models) )
+        \$ar['models'] = \$models;
+
+    echo \$this->renderPartial('_form', \$ar);
+?>";
 ?>
