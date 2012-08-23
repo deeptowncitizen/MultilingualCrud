@@ -55,6 +55,10 @@ function generateField(\$columnName, \$columnType, \$columnSize, \$language = 'e
         }
     }
 }
+
+function getContent(\$model, \$language, \$field) {
+    return (\$model->language == \$language) ? \$model->\$field : '';
+}
     
 /// Generate translation tabs
 \$tabs = array();
