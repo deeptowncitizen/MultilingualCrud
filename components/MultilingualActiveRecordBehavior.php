@@ -91,4 +91,27 @@ class MultilingualActiveRecordBehavior extends CActiveRecordBehavior
         
         return $owner;
     }
+    
+    /**
+    * @desc Return CActiveDataProvider for an owner
+    * @param CDbCriteria $criteria
+    * Criteria to be merged with. Array and CDbCriteria types are allowed
+    * @param array $pagination
+    * Pagination parameters to be merged with default. Use False to turn pagination off
+    */
+    public function getDataProvider($criteria=null, $pagination=null)
+    {
+        $owner = $this->getOwner();
+        if ((is_array ($criteria)) || ($criteria instanceof CDbCriteria) )
+           $owner->getDbCriteria()->mergeWith($criteria);
+        if( $pagination )
+            $pagination = CMap::mergeArray( array('pageSize' => 10), (array) $pagination);
+        $provider = new CActiveDataProvider( get_class($owner), array(
+                        'criteria'=> $owner->getDbCriteria(),
+                        'pagination' => $pagination
+        ));
+        if( !$pagination )
+            $provider->setPagination( false );
+        return $provider;
+    }
 }

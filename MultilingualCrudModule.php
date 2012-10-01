@@ -27,4 +27,15 @@ class MultilingualCrudModule extends CWebModule
             'MultilingualCrud.components.*',
 		));
 	}
+    
+    
+    /**
+    * Check is passed language is available by control panel
+    * 
+    * @param string $language
+    * Language identifier ('en_US', 'ru_RU', etc.)
+    */
+    public function isLanguageAvailable($language) {
+        return MlLanguage::model()->findByAttributes( array('language' => $language, 'is_active' => true) );
+    }
 }

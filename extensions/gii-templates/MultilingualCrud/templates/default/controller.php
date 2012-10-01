@@ -210,6 +210,28 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 		}
 	}
     
+	/**
+    * Check is attribute is a range attribute
+	* In this case it is neccessary to skip checking it value for empty
+    * 
+    * @param string $name
+    * Attribute name to check in model
+    * 
+    * @return True if nor of the fields changed, False otherwise
+    */
+	private function isRangeAttribute($name)
+    {
+        $rules = <?php echo $this->modelClass; ?>::model()->rules();
+        foreach( $rules as $rule ) {
+            if( !is_array($rule) || count($rule) < 2 )
+                continue;
+            if( in_array('CRangeValidator', $rule ) && $rule[0] == $name ) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
     /**
     * Check parameters list for changed elements
     * 
@@ -223,7 +245,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
             if( in_array( $name, Yii::app()->getModule('MultilingualCrud')->fieldsPk ) ) {
                 continue;
             }
-            if( $value ) {
+            if( $value && !$this->isRangeAttribute($name) ) {
                 return false;
             }
         }
@@ -300,6 +322,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 
         /// response with error code
         if( sizeof($errorsList) ) {
+			Yii::log(print_r($errorsList, true));
             $this->onError( 400, 'Please check data, you entered!', $errorsList );
         }
         

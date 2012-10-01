@@ -91,6 +91,9 @@ Model::model()->ml->locale(<language>)->findAllByAttributes( array() );
 As you can see it is very easy to use behavior in your routines. Exception is searching for composite primary key, where you should use behavior method (first example)
 
 
+If you need to check availability of some language in your routines, you can use built-in method:
+$isEnabled = Yii::app()->getModule('MultilungualCrud')->isLanguageAvailable('en_US');
+
 CONTACT AUTHOR or SUGGEST a FEATURE
 -----------------------------------------------------
 author: Reshetnik Dmitry

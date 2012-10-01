@@ -77,9 +77,9 @@ foreach( \$langs as \$language ) {
                 break;
             }
         }
-        if( !\$model ) {
-            \$model = \$theModel;
-        }
+    }
+    if( !\$model ) {
+        \$model = \$theModel;
     }
     
     \$content = '';
