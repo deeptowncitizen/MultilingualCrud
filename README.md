@@ -98,4 +98,4 @@ CONTACT AUTHOR or SUGGEST a FEATURE
 -----------------------------------------------------
 author: Reshetnik Dmitry
 email: reshetnikd@gmail.com
-website: all-of.me/development/yii/multilingual-crud/
+website: http://all-of.me/yii-multilingual-crud/
