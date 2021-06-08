@@ -96,6 +96,3 @@ $isEnabled = Yii::app()->getModule('MultilungualCrud')->isLanguageAvailable('en_
 
 CONTACT AUTHOR or SUGGEST a FEATURE
 -----------------------------------------------------
-author: Reshetnik Dmitry
-email: reshetnikd@gmail.com
-website: http://all-of.me/yii-multilingual-crud/
